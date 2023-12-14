@@ -91,6 +91,13 @@ class AddressBookMain:
         self.cont_person_dict = {}
         self.book_name = book_name
 
+    def delete_contact(self, name):
+        contact_obj: Contact = self.cont_person_dict.get(name)
+        if contact_obj:
+            self.cont_person_dict.pop(name)
+        else:
+            print("contact is not found !!")
+
     def add_contact(self, contact_obj):
         """
         Description : This method made for add information of person.
@@ -111,6 +118,7 @@ class AddressBookMain:
         name = input("Enter your name : ")
         contact_obj: Contact = self.cont_person_dict.get(name)
         if contact_obj:
+            print(contact_obj.zip_code)
             contact_obj.update_personal_details()
         else:
             print("contact is not found!!")
@@ -138,7 +146,8 @@ def main():
     add_book_obj = AddressBookMain(book_name)
 
     while True:
-        print("0.exit : \n 1.Add person details: \n 2.edit person details : \n 3.display all details :")
+        print("0.exit : \n 1.Add person details: \n 2.edit person details : \n 3.display all details : \n "
+              "4.Delete for person details :")
         your_choice = int(input("Enter your choice: "))
         match your_choice:
             case 1:
@@ -156,6 +165,9 @@ def main():
                 add_book_obj.edit_person_details()
             case 3:
                 add_book_obj.display_all_contact_details()
+            case 4:
+                name = input("Enter name you want to delete :")
+                add_book_obj.delete_contact(name)
 
             case 0:
                 break
