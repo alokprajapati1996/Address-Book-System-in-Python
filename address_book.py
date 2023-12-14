@@ -148,7 +148,7 @@ class MultipleAddressBook:
     def add_address_book(self, add_book_obj: AddressBookMain):
         """
         Description : This function made for add all information of multiple address book.
-        parameter : self as parameter
+        parameter : self as parameter , add_book_obj
         return : None
 
         """
