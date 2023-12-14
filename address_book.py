@@ -107,7 +107,7 @@ class AddressBookMain:
     def add_contact(self, contact_obj):
         """
         Description : This method made for add information of person.
-        parameter : None
+        parameter : self and contact_obj as  parameter
         return : None
 
         """
@@ -117,7 +117,7 @@ class AddressBookMain:
     def edit_person_details(self):
         """
         Description : This function made for check person availability ofter that call  contact class function.
-        parameter : None
+        parameter : self as a parameter
         return : None
 
         """
