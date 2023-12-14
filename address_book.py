@@ -2,11 +2,11 @@
 
 @Author: Alok kumar
 
-@Date: 13-12-23 2:38:30
+@Date: 14-12-23 9:38:30
 
 @Last Modified by: Alok kumar
 
-@Last Modified time: 13-12-2023 5:30:30
+@Last Modified time: 14-12-2023 2:30:30
 
 @Title : Implementation of Address Book System
 
@@ -27,7 +27,7 @@ class Contact:
     def update_personal_details(self):
         """
         Description : This function made for edit all information of contact.
-        parameter : None
+        parameter : self as parameter
         return : None
 
         """
@@ -87,11 +87,17 @@ class Contact:
 
 class AddressBookMain:
 
-    def __init__(self, book_name):
+    def __init__(self, book):  # book name
         self.cont_person_dict = {}
-        self.book_name = book_name
+        self.book_name = book
 
     def delete_contact(self, name):
+        """
+        Description : This function made for delete person information of contact.
+        parameter : None
+        return : None
+
+        """
         contact_obj: Contact = self.cont_person_dict.get(name)
         if contact_obj:
             self.cont_person_dict.pop(name)
@@ -124,9 +130,10 @@ class AddressBookMain:
             print("contact is not found!!")
 
     def display_all_contact_details(self):
+
         """
         Description : This function made for display information of contact.
-        parameter : None
+        parameter : self as parameter
         return : None
 
         """
@@ -134,7 +141,33 @@ class AddressBookMain:
             value.display_person_details()
 
 
+class MultipleAddressBook:
+    def __init__(self):
+        self.multi_add_book_dict = {}
+
+    def add_address_book(self, add_book_obj: AddressBookMain):
+        """
+        Description : This function made for add all information of multiple address book.
+        parameter : self as parameter
+        return : None
+
+        """
+        self.multi_add_book_dict.update({add_book_obj.book_name: add_book_obj})
+
+    def display_multi_book_details(self):
+        """
+        Description : This function made for show all information of Address Book.
+        parameter : self as parameter
+        return : None
+
+        """
+        for key, value in self.multi_add_book_dict.items():
+            print(f" Book : {key} | Total Contact Person : {len(value.cont_person_dict)}")
+
+
 def main():
+    multi_add_book_obj = MultipleAddressBook()
+
     """
     Description : This function made for access information of contact.
     parameter : None
@@ -142,15 +175,17 @@ def main():
 
     """
     print("Welcome to Address Book Program in AddressBookMain class on START Master Branch")
-    book_name = input("Enter book name: ")
-    add_book_obj = AddressBookMain(book_name)
 
     while True:
-        print("0.exit : \n 1.Add person details: \n 2.edit person details : \n 3.display all details : \n "
-              "4.Delete for person details :")
+        print("0.exit : \n 1.Add person details: \n 2.edit person details : \n 3.display  contact details  : \n "
+              "4.Delete for person details : \n 5.display all details :")
         your_choice = int(input("Enter your choice: "))
         match your_choice:
             case 1:
+                book_name = input("Enter book name: ")
+                if multi_add_book_obj.multi_add_book_dict.get(book_name) is None:
+                    add_book_obj = AddressBookMain(book_name)
+
                 first_name = input("Enter first name: ")
                 last_name = input("Enter last name: ")
                 address = input("Enter address : ")
@@ -161,13 +196,21 @@ def main():
                 email_id = input("Enter email id: ")
                 contact_obj = Contact(first_name, last_name, address, city, state, zip_code, phone_no, email_id)
                 add_book_obj.add_contact(contact_obj)
+                multi_add_book_obj.add_address_book(add_book_obj)
             case 2:
                 add_book_obj.edit_person_details()
             case 3:
-                add_book_obj.display_all_contact_details()
+                book_name = input("Enter book name :")
+                add_book_obj = multi_add_book_obj.multi_add_book_dict.get(book_name)
+                if add_book_obj:
+                    add_book_obj.display_all_contact_details()
+                else:
+                    print("Book is not find !!")
             case 4:
                 name = input("Enter name you want to delete :")
                 add_book_obj.delete_contact(name)
+            case 5:
+                multi_add_book_obj.display_multi_book_details()
 
             case 0:
                 break
