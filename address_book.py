@@ -46,7 +46,7 @@ class Contact:
             edit_choice = int(input("enter your choice : "))
             match edit_choice:
                 case 1:
-                    name = input("enter your name : ")
+                    name = input("enter your name :")
                     self.first_name = name
                 case 2:
                     l_name = input("enter last name : ")
@@ -67,7 +67,7 @@ class Contact:
                     new_mobile = input("enter mobile no. : ")
                     self.phone_no = new_mobile
                 case 8:
-                    new_mail = input("enter new mail : ")
+                    new_mail = input("enter new mail  : ")
                     self.email_id = new_mail
                 case 9:
                     break
@@ -79,7 +79,7 @@ class Contact:
         return : None
 
         """
-        print(f"Name: {self.first_name} Last Name : {self.last_name}")
+        print(f"Name: {self.first_name} Last Name : {self.last_name} ")
         print(f"Address: {self.address} city : {self.city}")
         print(f"State: {self.state} Last Zip_code : {self.zip_code}")
         print(f"Mobile N0.: {self.phone_no} email id : {self.email_id}")
