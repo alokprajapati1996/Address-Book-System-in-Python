@@ -111,8 +111,10 @@ class AddressBookMain:
         return : None
 
         """
-
-        self.cont_person_dict.update({contact_obj.first_name: contact_obj})
+        if contact_obj.first_name not in self.cont_person_dict:
+            self.cont_person_dict.update({contact_obj.first_name: contact_obj})
+        else:
+            print("person available in already.")
 
     def edit_person_details(self):
         """
